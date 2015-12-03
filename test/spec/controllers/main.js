@@ -9,7 +9,7 @@ describe('Controller: MainCtrl', function () {
     scope,
     httpBackend;
 
-  var testUserFeedbackUrl = 'http://f33dbackme.herokuapp.com/test_user/feedbacks';
+  var testUserFeedbackUrl = 'https://f33dbackme.herokuapp.com/test_user/feedbacks';
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $httpBackend) {

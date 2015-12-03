@@ -20,7 +20,7 @@ angular.module('feedbackmeWebApp')
     $scope.validationErrors = [];
 
     $scope.provideFeedback = function() {
-      $http.post('http://f33dbackme.herokuapp.com/test_user/feedbacks', $scope.feedback)
+      $http.post('https://f33dbackme.herokuapp.com/test_user/feedbacks', $scope.feedback)
         .success(function(){
           $scope.message = 'Feedback sent';
           $scope.showMessage = true;
