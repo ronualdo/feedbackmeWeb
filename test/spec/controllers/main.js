@@ -67,7 +67,4 @@ describe('Controller: MainCtrl', function () {
     expect(scope.validationErrors).toContain(validationErrors[0]);
     expect(scope.validationErrors).toContain(validationErrors[1]); 
   });
-
-
-
 });
