@@ -1,3 +1,9 @@
+<div class"alert alert-info" >
+  <ul ng-repeat="validationError in validationErrors" />
+    <li>{{validationError.message}}</li>
+  </ul>
+</div>
+
 <div class="alert alert-info" ng-show="showMessage">
   {{ message }}  
 </div>

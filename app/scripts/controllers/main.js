@@ -27,6 +27,7 @@ angular.module('feedbackmeWebApp')
           cleanFields();
         })
         .error(function(data) {
+          console.log(data);
           $scope.validationErrors = data;
         });
     };
