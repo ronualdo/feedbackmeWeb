@@ -15,8 +15,8 @@ describe('Controller: MainCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope, $httpBackend) {
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
-      $scope: scope
-      // place here mocked dependencies
+      $scope: scope,
+      $routeParams: {username: 'test_user'}
     });
     httpBackend = $httpBackend;
   }));

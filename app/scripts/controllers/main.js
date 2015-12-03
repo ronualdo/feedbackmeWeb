@@ -8,7 +8,7 @@
  * Controller of the feedbackmeWebApp
  */
 angular.module('feedbackmeWebApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, $routeParams) {
  
     $scope.feedback = {
       feedbackText: '',
@@ -21,7 +21,7 @@ angular.module('feedbackmeWebApp')
     
     $scope.provideFeedback = function() {
       $scope.showMessage = false;
-      $http.post('https://f33dbackme.herokuapp.com/test_user/feedbacks', $scope.feedback)
+      $http.post('https://f33dbackme.herokuapp.com/'+ $routeParams.username +'/feedbacks', $scope.feedback)
         .success(function(){
           $scope.validationErrors = [];
           $scope.message = 'Feedback sent';
