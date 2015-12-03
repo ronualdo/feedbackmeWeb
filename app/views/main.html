@@ -1,7 +1,7 @@
-<div>
+<div class="alert alert-info" ng-show="hasValidationErrors()">
   <ul>
     <li ng-repeat="validationError in validationErrors">
-      {{validationError.message}}
+      {{validationError.field}}  {{validationError.message}}
     </li>
   </ul>
 </div>

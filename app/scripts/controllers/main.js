@@ -18,10 +18,12 @@ angular.module('feedbackmeWebApp')
     $scope.message = '';
     $scope.showMessage = false;
     $scope.validationErrors = [];
-
+    
     $scope.provideFeedback = function() {
+      $scope.showMessage = false;
       $http.post('https://f33dbackme.herokuapp.com/test_user/feedbacks', $scope.feedback)
         .success(function(){
+          $scope.validationErrors = [];
           $scope.message = 'Feedback sent';
           $scope.showMessage = true;
           cleanFields();
@@ -30,6 +32,10 @@ angular.module('feedbackmeWebApp')
           console.log(data);
           $scope.validationErrors = data;
         });
+    };
+
+    $scope.hasValidationErrors = function() {
+      return $scope.validationErrors.length > 0;
     };
 
     var cleanFields = function() {
