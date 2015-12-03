@@ -37,11 +37,15 @@ describe('Controller: MainCtrl', function () {
   });
 
   it('should clean fields after providing feedback', function(){
-    
+    scope.feedback.feedbackText = 'test';
+    scope.feedback.author = "author";
+
     httpBackend.when('POST', testUserFeedbackUrl)
         .respond({});
 
     scope.provideFeedback();
+    
+    httpBackend.flush();
 
     expect(scope.feedback.feedbackText).toEqual('');
     expect(scope.feedback.author).toEqual('');

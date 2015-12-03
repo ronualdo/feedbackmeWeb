@@ -10,25 +10,28 @@
 angular.module('feedbackmeWebApp')
   .controller('MainCtrl', function ($scope, $http) {
  
-    var emptyFeedback = {
+    $scope.feedback = {
       feedbackText: '',
       author: ''
     };
 
-    $scope.feedback = emptyFeedback;
     $scope.message = '';
+    $scope.showMessage = false;
     $scope.validationErrors = [];
 
     $scope.provideFeedback = function() {
       $http.post('http://f33dbackme.herokuapp.com/test_user/feedbacks', $scope.feedback)
         .success(function(){
-          console.log('success');
           $scope.message = 'Feedback sent';
+          $scope.showMessage = true;
+          cleanFields();
         })
         .error(function(data) {
-          console.log('error');
           $scope.validationErrors = data;
         });
     }
-  
+    var cleanFields = function() {
+      $scope.feedback.feedbackText = '';
+      $scope.feedback.author = '';
+    };
   });
