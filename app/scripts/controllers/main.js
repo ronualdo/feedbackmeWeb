@@ -11,6 +11,7 @@ angular.module('feedbackmeWebApp')
     $scope.message = '';
     $scope.showMessage = false;
     $scope.validationErrors = [];
+    $scope.feedbacks = [];
     var feedbackUrl = 'https://f33dbackme.herokuapp.com/'+ $routeParams.username +'/feedbacks';
 
     var loadFeedbacks = function() {
@@ -34,6 +35,7 @@ angular.module('feedbackmeWebApp')
           $scope.message = 'Feedback sent';
           $scope.showMessage = true;
           cleanFields();
+          loadFeedbacks();
         })
         .error(function(data) {
           if (data) {

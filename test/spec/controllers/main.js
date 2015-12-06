@@ -81,12 +81,32 @@ describe('Controller: MainCtrl', function () {
     ];
 
     httpBackend.when('GET', testUserFeedbackUrl).respond(201, feedbacks);
-
     httpBackend.flush();
 
     expect(scope.feedbacks.length).toBe(2);
     expect(scope.feedbacks).toContain(feedbacks[0]);
     expect(scope.feedbacks).toContain(feedbacks[1]);
+  });
+
+  it('should load list of feedbacks after submiting', function() {
+    var newFeedback = {
+      feedbackText: 'a new feedback ',
+      author: 'author'
+    };
+
+    scope.feedback.feedbackText = newFeedback.feedbackText;
+    scope.feedback.author = newFeedback.author;
+
+    httpBackend.expectGET(testUserFeedbackUrl).respond(201, []);
+    httpBackend.expectGET(testUserFeedbackUrl).respond(201, [newFeedback]);
+    httpBackend.when('POST', testUserFeedbackUrl).respond(201, {});
+
+    scope.provideFeedback();
+
+    httpBackend.flush();
+
+    expect(scope.feedbacks.length).toBe(1);
+    expect(scope.feedbacks).toContain(newFeedback);
   });
 
 });

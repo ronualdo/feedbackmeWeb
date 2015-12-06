@@ -9,21 +9,24 @@
 <div class="alert alert-info" ng-show="showMessage">
   {{ message }}  
 </div>
-<form ng-submit="provideFeedback()">
-    <fieldset class="form-group">
-      <label for="feedback" >Feedback: </label>
-      <textarea class="form-control" id="feedback" rows="3" ng-model="feedback.feedbackText"></textarea>
-    </fieldset>
-    <fieldset class="form-group" >
-      <label for="author">Author: </label>
-      <input type="text" id="author" ng-model="feedback.author"/>
-    </fieldset>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-
+<div class="panel panel-default" >
+  <div class="panel-body" >
+    <form ng-submit="provideFeedback()">
+      <fieldset class="form-group">
+        <label for="feedback" >Feedback: </label>
+        <textarea class="form-control" id="feedback" rows="3" ng-model="feedback.feedbackText"></textarea>
+      </fieldset>
+      <fieldset class="form-group" >
+        <label for="author">Author: </label>
+        <input type="text" id="author" ng-model="feedback.author"/>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
 <div>
-  <ul>
-    <li ng-repeat="feedback in feedbacks" >
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="feedback in feedbacks" >
       {{feedback.feedbackText}}
     </li>
   </ul>
