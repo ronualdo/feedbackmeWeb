@@ -13,13 +13,18 @@ angular.module('feedbackmeWebApp')
     $scope.validationErrors = [];
     var feedbackUrl = 'https://f33dbackme.herokuapp.com/'+ $routeParams.username +'/feedbacks';
 
-    $http.get(feedbackUrl)
-        .success(function(data) {
-          $scope.feedbacks = data;
-        })
-        .error(function() {
-          
-        });
+    var loadFeedbacks = function() {
+      $http.get(feedbackUrl)
+          .success(function(data) {
+            $scope.feedbacks = data;
+          })
+          .error(function() {
+            $scope.message = 'Problem retrieving feedbacks';
+            $scope.showMessage = true;
+          });
+    };
+  
+    loadFeedbacks();
 
     $scope.provideFeedback = function() {
       $scope.showMessage = false;
@@ -47,4 +52,5 @@ angular.module('feedbackmeWebApp')
       $scope.feedback.feedbackText = '';
       $scope.feedback.author = '';
     };
-  });
+
+});
