@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name feedbackmeWebApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the feedbackmeWebApp
- */
 angular.module('feedbackmeWebApp')
   .controller('MainCtrl', function ($scope, $http, $routeParams) {
  
@@ -21,7 +14,7 @@ angular.module('feedbackmeWebApp')
     
     $scope.provideFeedback = function() {
       $scope.showMessage = false;
-      $http.post('https://f33dbackme.herokuapp.com/'+ $routeParams.username +'/feedbacks', $scope.feedback)
+      $http.post('http://localhost:8080/'+ $routeParams.username +'/feedbacks', $scope.feedback)
         .success(function(){
           $scope.validationErrors = [];
           $scope.message = 'Feedback sent';
@@ -29,8 +22,11 @@ angular.module('feedbackmeWebApp')
           cleanFields();
         })
         .error(function(data) {
-          console.log(data);
-          $scope.validationErrors = data;
+          if (data) {
+            $scope.validationErrors = data;
+          } else {
+            $scope.validationErrors = [{message: 'problem while sending feedback'}];
+          }
         });
     };
 
@@ -42,4 +38,8 @@ angular.module('feedbackmeWebApp')
       $scope.feedback.feedbackText = '';
       $scope.feedback.author = '';
     };
+
+    var loadFeedbacks() = function() {
+    
+    }
   });
