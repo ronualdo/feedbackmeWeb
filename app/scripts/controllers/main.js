@@ -11,10 +11,19 @@ angular.module('feedbackmeWebApp')
     $scope.message = '';
     $scope.showMessage = false;
     $scope.validationErrors = [];
-    
+    var feedbackUrl = 'https://f33dbackme.herokuapp.com/'+ $routeParams.username +'/feedbacks';
+
+    $http.get(feedbackUrl)
+        .success(function(data) {
+          $scope.feedbacks = data;
+        })
+        .error(function() {
+          
+        });
+
     $scope.provideFeedback = function() {
       $scope.showMessage = false;
-      $http.post('http://localhost:8080/'+ $routeParams.username +'/feedbacks', $scope.feedback)
+      $http.post(feedbackUrl, $scope.feedback)
         .success(function(){
           $scope.validationErrors = [];
           $scope.message = 'Feedback sent';
@@ -38,8 +47,4 @@ angular.module('feedbackmeWebApp')
       $scope.feedback.feedbackText = '';
       $scope.feedback.author = '';
     };
-
-    var loadFeedbacks() = function() {
-    
-    }
   });

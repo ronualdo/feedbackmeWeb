@@ -28,6 +28,9 @@ describe('Controller: MainCtrl', function () {
     };
         
     scope.feedback = newFeedback;
+
+
+    httpBackend.when('GET', testUserFeedbackUrl).respond(201, []);
     httpBackend.expectPOST(testUserFeedbackUrl, newFeedback).respond({});
     
     scope.provideFeedback();
@@ -40,6 +43,7 @@ describe('Controller: MainCtrl', function () {
     scope.feedback.feedbackText = 'test';
     scope.feedback.author = 'author';
 
+    httpBackend.when('GET', testUserFeedbackUrl).respond(201, []);
     httpBackend.when('POST', testUserFeedbackUrl)
         .respond({});
 
@@ -56,7 +60,9 @@ describe('Controller: MainCtrl', function () {
       { field: 'field1', message: 'validation message 1' },
       { field: 'field2', message: 'validation message 2' }
     ];
-    
+   
+
+    httpBackend.when('GET', testUserFeedbackUrl).respond(201, []);
     httpBackend.when('POST', testUserFeedbackUrl).respond(401, validationErrors);
 
     scope.provideFeedback();
@@ -67,4 +73,20 @@ describe('Controller: MainCtrl', function () {
     expect(scope.validationErrors).toContain(validationErrors[0]);
     expect(scope.validationErrors).toContain(validationErrors[1]); 
   });
+
+  it('should list the feedbacks of the user', function(){
+    var feedbacks = [
+      {id: 1, feedbackText: 'feedback 1', author: 'author1'},
+      {id:2, feedbackText: 'feedback 2', author: 'author2'}
+    ];
+
+    httpBackend.when('GET', testUserFeedbackUrl).respond(201, feedbacks);
+
+    httpBackend.flush();
+
+    expect(scope.feedbacks.length).toBe(2);
+    expect(scope.feedbacks).toContain(feedbacks[0]);
+    expect(scope.feedbacks).toContain(feedbacks[1]);
+  });
+
 });
