@@ -20,8 +20,7 @@ angular.module('feedbackmeWebApp')
             $scope.feedbacks = data;
           })
           .error(function() {
-            $scope.message = 'Problem retrieving feedbacks';
-            $scope.showMessage = true;
+            showMessage('Problem retrieving feedbacks');
           });
     };
   
@@ -32,8 +31,7 @@ angular.module('feedbackmeWebApp')
       $http.post(feedbackUrl, $scope.feedback)
         .success(function(){
           $scope.validationErrors = [];
-          $scope.message = 'Feedback sent';
-          $scope.showMessage = true;
+          showMessage('Feedback sent');
           cleanFields();
           loadFeedbacks();
         })
@@ -53,6 +51,11 @@ angular.module('feedbackmeWebApp')
     var cleanFields = function() {
       $scope.feedback.feedbackText = '';
       $scope.feedback.author = '';
+    };
+
+    var showMessage = function(message) {
+      $scope.message = message;
+      $scope.showMessage = true;
     };
 
 });
